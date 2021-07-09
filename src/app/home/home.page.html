@@ -1,20 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
     <ion-title>
-      Blank
+      Uiniqu
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" class="ion-padding-end">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-avatar>
+        <img src="/assets/img/def_profile.png" alt="profil">
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-slides #bannerSlides pager="true" id="banner">
+    <ion-slide class="padding-def">
+      <img src="/assets/img/q1.jpg" alt="q1">
+    </ion-slide>
+    <ion-slide class="padding-def">
+      <img src="/assets/img/q2.jpg" alt="q1">
+    </ion-slide>
+    <ion-slide class="padding-def">
+      <img src="/assets/img/q3.jpg" alt="q1">
+    </ion-slide>
+  </ion-slides>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-item color="transparent" lines="none" class="ion-no-padding padding-def" id="nav-menu">
+    <ion-segment value="0" mode="ios" (ionChange)="navSlide($event.target.value)" scrollable>
+      <ion-segment-button value="0">
+        Tadarus
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        Tahfidz
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  
+  <div class="padding-def" id="menu">
+    <ion-slides #menuSlides class="swiper-no-swiping">
+      <ion-slide>
+        <ion-list class="ion-no-padding">
+          <ion-list-header class="ion-no-padding" color="light">
+            <ion-searchbar placeholder="Cari Surat" (ionInput)="search($event.target.value)" class="ion-text-left ion-no-padding ion-no-margin searchbarinput" #ic mode="ios"></ion-searchbar>
+          </ion-list-header>
+          <ion-item (click)="openSurah(sr.nomor);" color="light" class="ion-no-padding ion-no-margin" button lines="none" *ngFor="let sr of surah">
+            <ion-avatar slot="start">
+              {{sr.nomor}}
+            </ion-avatar>
+            <ion-label>
+              <p>
+                <span *ngIf="sr.type == 'mekah' else es">Makkiyah</span> 
+                • {{sr.ayat}} Ayat
+                <ng-template #es>
+                  <span>Madaniyah</span>
+                </ng-template>
+              </p>
+              <h2>{{sr.nama}}</h2>
+            </ion-label>
+            <ion-buttons item-right slot="end">
+              <ion-button (click)="gn.navigate('home'); $event.stopPropagation();" shape="round">
+                <ion-icon name="headset-outline"></ion-icon>
+              </ion-button>
+              <ion-button (click)="gn.navigate('home'); $event.stopPropagation();" shape="round">
+                <ion-icon name="information-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>

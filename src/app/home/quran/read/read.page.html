@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md" class="tl-1">
+    <ion-button (click)="gn.navigate('home')" slot="start" fill="clear" class="ion-no-padding" mode="ios" color="dark">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-title>
+      {{srh.name_latin}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [ngStyle]="{'display':di[0]}" (click)="gn.navigate('home/quran/read/'+di[2])">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button [ngStyle]="{'display':di[1]}" (click)="gn.navigate('home/quran/read/'+di[3])">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar class="tl-2">
+      <ion-label>
+        <p>
+          {{srh.translations.id.name}} • {{srh.number_of_ayah}} Ayat
+        </p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button shape="round">
+          <ion-icon name="headset-outline"></ion-icon>
+        </ion-button>
+        <ion-button shape="round">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div>
+    <ion-list class="ion-no-padding">
+      <ion-item button lines="none" *ngFor="let sr of ayh" [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'">
+        <ion-avatar>
+          {{sr.no}}
+        </ion-avatar>
+        <ion-label class="ion-text-wrap ay-{{sr.no}}">
+          <p class="txt">
+            {{sr.txt}}
+          </p>
+          <p class="trs">
+            {{sr.trs}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
