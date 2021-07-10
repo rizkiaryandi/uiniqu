@@ -42,12 +42,12 @@
   </ion-item>
 
   
-  <div class="padding-def" id="menu">
+  <div class="padding-def-0" id="menu">
     <ion-slides #menuSlides class="swiper-no-swiping">
       <ion-slide>
         <ion-list class="ion-no-padding">
           <ion-list-header class="ion-no-padding" color="light">
-            <ion-searchbar placeholder="Cari Surat" (ionInput)="search($event.target.value)" class="ion-text-left ion-no-padding ion-no-margin searchbarinput" #ic mode="ios"></ion-searchbar>
+            <ion-searchbar placeholder="Cari nama atau nomor surat" (ionInput)="search($event.target.value)" class="ion-text-left ion-no-padding ion-no-margin searchbarinput" #ic mode="ios"></ion-searchbar>
           </ion-list-header>
           <ion-item (click)="openSurah(sr.nomor);" color="light" class="ion-no-padding ion-no-margin" button lines="none" *ngFor="let sr of surah">
             <ion-avatar slot="start">
@@ -64,10 +64,10 @@
               <h2>{{sr.nama}}</h2>
             </ion-label>
             <ion-buttons item-right slot="end">
-              <ion-button (click)="gn.navigate('home'); $event.stopPropagation();" shape="round">
+              <ion-button (click)="play(sr.nomor); $event.stopPropagation();" shape="round">
                 <ion-icon name="headset-outline"></ion-icon>
               </ion-button>
-              <ion-button (click)="gn.navigate('home'); $event.stopPropagation();" shape="round">
+              <ion-button (click)="tafsir(sr.nomor); $event.stopPropagation();" shape="round">
                 <ion-icon name="information-circle-outline"></ion-icon>
               </ion-button>
             </ion-buttons>

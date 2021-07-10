@@ -45,3 +45,30 @@ div.swiper-pagination {
 .padding-def-0{
     padding: 0px 16px 0px 16px !important;
 }
+
+.my-custom-class .popover-content {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+.modal-250px .modal-wrapper{
+    height: 300px;
+    position: absolute;
+    bottom:0px;
+    border-radius: 28px 28px 0px 0px;
+}
+
+.modal-audio .modal-wrapper{
+    height: 128px;
+    position: absolute;
+    bottom:0px;
+    border-radius: 24px 24px 0px 0px;
+}
+
+.modal-tafsir .modal-wrapper{
+    height: 100%;
+    position: absolute;
+    bottom:0px;
+    border-radius: 14px 14px 0px 0px;
+}

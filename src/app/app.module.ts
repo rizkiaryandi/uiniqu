@@ -8,9 +8,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http'; 
 
+
+import { PopoverComponent } from './home/quran/read/popover/popover.component';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, PopoverComponent],
+  entryComponents: [PopoverComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     backButtonText: ''
   }), AppRoutingModule, HttpClientModule],

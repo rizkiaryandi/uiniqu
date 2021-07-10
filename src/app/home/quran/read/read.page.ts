@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../services/data/rest.service';
 import { GnService } from '../../../services/data/gn.service';
+import { ModalController } from '@ionic/angular';
+import { PopoverComponent } from './popover/popover.component';
+import { PlayComponent } from '../play/play.component';
+import { TafsirComponent } from '../tafsir/tafsir.component';
 
 @Component({
   selector: 'app-read',
@@ -19,7 +23,7 @@ export class ReadPage implements OnInit {
 
   di = ['block', 'block', 1,2];
   ayh:any=[];
-  constructor(private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) { }
+  constructor(private modalController:ModalController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) { }
 
   ngOnInit() {
     var id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -44,6 +48,60 @@ export class ReadPage implements OnInit {
         }
       }
     })
+  }
+
+  async ayahClick(event: any, id, surah, num) {
+    const modal = await this.modalController.create({
+      component: PopoverComponent,
+      componentProps:{
+        id:id,
+        surah:surah,
+        noSurah:num,
+        tfs: this.srh.tafsir.id.kemenag.text[id]
+      },
+      swipeToClose: true,
+      mode:"ios",
+      cssClass:'modal-250px',
+      backdropDismiss: true
+    });
+    modal.onDidDismiss().then(()=>{
+      
+    })
+    return await modal.present();
+  }
+
+  async play() {    
+    const modal = await this.modalController.create({
+      component: PlayComponent,
+      componentProps:{
+        num:this.srh.number,
+      },
+      swipeToClose: true,
+      mode:"ios",
+      cssClass:'modal-audio',
+      backdropDismiss: true
+    });
+    modal.onDidDismiss().then(()=>{
+      
+    })
+    return await modal.present();
+  }
+
+  async tafsir() {    
+    const modal = await this.modalController.create({
+      component: TafsirComponent,
+      componentProps:{
+        num:this.srh.number,
+      },
+      swipeToClose: true,
+      mode:"ios",
+      cssClass:'modal-tafsir',
+      backdropDismiss: true
+    });
+    modal.onDidDismiss().then(()=>{
+      
+    })
+    return await modal.present();
   }
 
 }

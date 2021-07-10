@@ -25,10 +25,10 @@
         </p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button shape="round">
+        <ion-button shape="round" (click)="play()">
           <ion-icon name="headset-outline"></ion-icon>
         </ion-button>
-        <ion-button shape="round">
+        <ion-button shape="round" (click)="tafsir()">
           <ion-icon name="information-circle-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -36,7 +36,7 @@
   </ion-header>
   <div>
     <ion-list class="ion-no-padding">
-      <ion-item button lines="none" *ngFor="let sr of ayh" [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'">
+      <ion-item button lines="none" *ngFor="let sr of ayh" [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'" (click)="ayahClick($event, sr.no, srh.name_latin, srh.number)">
         <ion-avatar>
           {{sr.no}}
         </ion-avatar>

@@ -1,0 +1,31 @@
+<ion-list lines="none">
+  <ion-item class="title" color="light" detail="false" lines="none">
+    <ion-label slot="start">
+      <p>{{surah}} &nbsp;•&nbsp; {{id}}</p>
+    </ion-label>
+  </ion-item>
+  <ion-item class="ls" color="light" detail="false" button (click)="lastRead()">
+    <ion-icon name="eyedrop-outline"></ion-icon>
+    <b>Tandai Terakhir Baca</b>
+  </ion-item>
+  <ion-item class="ls" color="light" detail="false" button (click)="success()">
+    <ion-icon name="bulb"></ion-icon>
+    Tandai Sudah dihafal
+  </ion-item>
+  <ion-item class="ls" color="light" detail="false" button (click)="tafsirClick()">
+    <ion-icon name="eye-outline"></ion-icon>
+    Lihat Tafsir (Kemenag)
+  </ion-item>
+  
+  <ion-item class="ls" color="light">
+    <ion-label>Pilih Qori</ion-label>
+    <ion-select [value] = "pQori" (ionChange)="changeQori($event)">
+      <ion-select-option *ngFor="let qr of qori" [value]="qr.subfolder">{{qr.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="ls" color="light">
+    <audio controls [src]="pLink" >
+    </audio>
+  </ion-item>
+
+</ion-list>

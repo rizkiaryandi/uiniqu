@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { RestService } from '../services/data/rest.service';
 import { GnService } from '../services/data/gn.service';
+import { PlayComponent } from './quran/play/play.component';
+import { TafsirComponent } from './quran/tafsir/tafsir.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +17,7 @@ export class HomePage {
 
   surah:any=[];
   defSurah:any;
-  constructor(private rs:RestService, private gn:GnService) {}
+  constructor(private modalController:ModalController, private rs:RestService, private gn:GnService) {}
 
   ngOnInit(){
     this.rs.http.get('./assets/quran/surah.json').subscribe(data=>{
@@ -58,6 +61,40 @@ export class HomePage {
         value.nomor.toLowerCase().match(new RegExp(searchTerm, 'g')) ||
         value.arti.toLowerCase().match(new RegExp(searchTerm, 'g'))
     })
-
   }
+
+  async play(num) {    
+    const modal = await this.modalController.create({
+      component: PlayComponent,
+      componentProps:{
+        num:num,
+      },
+      swipeToClose: true,
+      mode:"ios",
+      cssClass:'modal-audio',
+      backdropDismiss: true
+    });
+    modal.onDidDismiss().then(()=>{
+      
+    })
+    return await modal.present();
+  }
+
+  async tafsir(num) {    
+    const modal = await this.modalController.create({
+      component: TafsirComponent,
+      componentProps:{
+        num:num,
+      },
+      swipeToClose: true,
+      mode:"ios",
+      cssClass:'modal-tafsir',
+      backdropDismiss: true
+    });
+    modal.onDidDismiss().then(()=>{
+      
+    })
+    return await modal.present();
+  }
+
 }
