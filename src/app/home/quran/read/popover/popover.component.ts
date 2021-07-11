@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RestService } from '../../../../services/data/rest.service';
+import { GnService } from '../../../../services/data/gn.service';
 import { TafsirComponent } from '../../tafsir/tafsir.component';
 
 @Component({
@@ -16,7 +17,7 @@ export class PopoverComponent implements OnInit {
   pQori="";
   pLink = "";
   tfs = "";
-  constructor(private modalController:ModalController, private rs:RestService) { }
+  constructor(private modalController:ModalController, private rs:RestService, private gn:GnService) { }
 
   ngOnInit() {
     this.pQori = "Alafasy_64kbps";
@@ -28,6 +29,14 @@ export class PopoverComponent implements OnInit {
 
   lastRead(){
     this.modalController.dismiss();
+    this.gn.st.set('lastRead',{
+      surah_id: this.noSurah,
+      ayah: this.id,
+      surah: this.surah
+    }).then(()=>{
+      this.gn.toast("Terakhir Dibaca: "+this.surah+" ayat "+this.id, "medium");
+    })
+    
   }
 
   success(){

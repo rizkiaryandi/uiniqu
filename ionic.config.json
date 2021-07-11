@@ -1,5 +1,7 @@
 {
   "name": "Uiniqu",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

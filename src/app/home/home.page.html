@@ -46,6 +46,12 @@
     <ion-slides #menuSlides class="swiper-no-swiping">
       <ion-slide>
         <ion-list class="ion-no-padding">
+          <ion-item (click)="gn.navigate('home/quran/read/'+lastRead.surah_id+'/'+lastRead.ayah)" class="ion-no-padding ion-no-margin last-read" button lines="none" [ngStyle]="{'display':lr}">
+            <ion-label class="padding-def-0">
+              <h6>Terakhir dibaca:</h6>
+              <h2>{{lastRead.surah}} • {{lastRead.ayah}}</h2>
+            </ion-label>
+          </ion-item>
           <ion-list-header class="ion-no-padding" color="light">
             <ion-searchbar placeholder="Cari nama atau nomor surat" (ionInput)="search($event.target.value)" class="ion-text-left ion-no-padding ion-no-margin searchbarinput" #ic mode="ios"></ion-searchbar>
           </ion-list-header>

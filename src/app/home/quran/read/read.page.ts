@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../services/data/rest.service';
 import { GnService } from '../../../services/data/gn.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonContent } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
 import { PlayComponent } from '../play/play.component';
 import { TafsirComponent } from '../tafsir/tafsir.component';
@@ -13,6 +13,7 @@ import { TafsirComponent } from '../tafsir/tafsir.component';
   styleUrls: ['./read.page.scss'],
 })
 export class ReadPage implements OnInit {
+  @ViewChild(IonContent, { static: false }) content: IonContent;
   srh:any={
     translations:{
       id:{
@@ -23,9 +24,8 @@ export class ReadPage implements OnInit {
 
   di = ['block', 'block', 1,2];
   ayh:any=[];
-  constructor(private modalController:ModalController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) { }
-
-  ngOnInit() {
+  constructor(private modalController:ModalController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) {
+    
     var id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id == '1') this.di = ['none', 'block'];
     if(id == '114') this.di = ['block', 'none'];
@@ -47,7 +47,24 @@ export class ReadPage implements OnInit {
           trs:n.trs[i+1]
         }
       }
+      
     })
+  }
+
+  ngOnInit() {
+  }
+
+  ionViewDidEnter(){
+    setTimeout(()=>{
+      var ayah = this.activatedRoute.snapshot.paramMap.get('ayah');
+      if(ayah){
+        console.log(ayah)
+        var el = document.getElementById('ay'+ayah);
+        el.style.paddingTop = '64px';
+        el.style.background = 'rgb(var(--ion-color-success-rgb), 0.1)'
+        el.scrollIntoView();
+    }
+    }, 1000)
   }
 
   async ayahClick(event: any, id, surah, num) {
@@ -104,4 +121,8 @@ export class ReadPage implements OnInit {
     return await modal.present();
   }
 
+  // scrollToLabel(label) {
+  //   var titleELe = document.getElementById('ay-'+label);
+  //   this.content.scrollToPoint(0, titleELe.offsetTop, 600);
+  // }
 }

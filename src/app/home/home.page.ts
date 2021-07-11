@@ -15,8 +15,10 @@ export class HomePage {
   @ViewChild('bannerSlides', {static:true}) bannerSlides:IonSlides;
   @ViewChild('menuSlides', {static:true}) menuSlides:IonSlides;
 
+  lr = "none";
   surah:any=[];
   defSurah:any;
+  lastRead:any = {};
   constructor(private modalController:ModalController, private rs:RestService, private gn:GnService) {}
 
   ngOnInit(){
@@ -25,6 +27,7 @@ export class HomePage {
       this.defSurah = data;
     })
   }
+  
   doRefresh(event) {
     setTimeout(() => {
       event.target.complete();
@@ -34,6 +37,13 @@ export class HomePage {
   ionViewDidEnter(){
     this.bannerSlides.update();
     this.menuSlides.update();
+
+    this.gn.st.get('lastRead').then(data=>{
+      if(data != null){
+        this.lr = 'block';
+        this.lastRead = data
+      }
+    })
   }
 
   navSlide(val){

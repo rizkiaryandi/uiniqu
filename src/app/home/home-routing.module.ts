@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'quran/read/:id',
     loadChildren: () => import('./quran/read/read.module').then( m => m.ReadPageModule)
+  },
+  {
+    path: 'quran/read/:id/:ayah',
+    loadChildren: () => import('./quran/read/read.module').then( m => m.ReadPageModule)
   }
 ];
 
