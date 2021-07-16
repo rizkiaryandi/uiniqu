@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../services/data/rest.service';
 import { GnService } from '../../../services/data/gn.service';
@@ -12,8 +12,9 @@ import { TafsirComponent } from '../tafsir/tafsir.component';
   templateUrl: './read.page.html',
   styleUrls: ['./read.page.scss'],
 })
-export class ReadPage implements OnInit {
+export class ReadPage {
   @ViewChild(IonContent, { static: false }) content: IonContent;
+  @ViewChildren('allTheseThings') things: QueryList<any>;
   srh:any={
     translations:{
       id:{
@@ -24,8 +25,13 @@ export class ReadPage implements OnInit {
 
   di = ['block', 'block', 1,2];
   ayh:any=[];
+  ho = true;
   constructor(private modalController:ModalController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) {
     
+    
+  }
+
+  ionViewDidEnter() {
     var id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id == '1') this.di = ['none', 'block'];
     if(id == '114') this.di = ['block', 'none'];
@@ -48,23 +54,25 @@ export class ReadPage implements OnInit {
         }
       }
       
+      
+      var ayah = this.activatedRoute.snapshot.paramMap.get('ayah');
+      if(ayah){
+        this.things.changes.subscribe((a) => {
+          setTimeout(()=>{
+            this.cth(parseInt(ayah));
+          }, 100)
+        })
+
+        
+      }
+      
     })
   }
 
-  ngOnInit() {
-  }
-
-  ionViewDidEnter(){
-    setTimeout(()=>{
-      var ayah = this.activatedRoute.snapshot.paramMap.get('ayah');
-      if(ayah){
-        console.log(ayah)
-        var el = document.getElementById('ay'+ayah);
-        el.style.paddingTop = '64px';
-        el.style.background = 'rgb(var(--ion-color-success-rgb), 0.1)'
-        el.scrollIntoView();
-    }
-    }, 1000)
+  cth(ayah){
+    var el = document.getElementById('ay'+ayah);
+    el.classList.add("active-ayah");
+    el.scrollIntoView();
   }
 
   async ayahClick(event: any, id, surah, num) {

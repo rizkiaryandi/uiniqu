@@ -56,6 +56,11 @@ ion-item{
 
 }
 
+.active-ayah{
+  --background: rgb(var(--ion-color-success-rgb), 0.1) !important;
+  --padding-top: 64px;
+}
+
 .odd{
   --background: var(--ion-color-light);
 }

@@ -36,7 +36,7 @@
   </ion-header>
   <div>
     <ion-list class="ion-no-padding">
-      <ion-item button lines="none" *ngFor="let sr of ayh" [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'" (click)="ayahClick($event, sr.no, srh.name_latin, srh.number)" id="ay{{sr.no}}">
+      <ion-item #allTheseThings [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'" button lines="none" *ngFor="let sr of ayh; let last = last" (click)="ayahClick($event, sr.no, srh.name_latin, srh.number)" id="ay{{sr.no}}">
         <ion-avatar>
           {{sr.no}}
         </ion-avatar>
