@@ -4,8 +4,21 @@
       <p class="ttl">{{surah}}</p>
     </ion-label>
   </ion-item>
+  <ion-item class="qr" detail="false" lines="none" *ngIf="sr != undefinded" [style]="dis">
+    <ion-label class="ion-text-wrap">
+      <p class="txta">
+        {{sr.txt}}
+      </p>
+      <p class="trsa">
+        {{sr.trs}}
+      </p>
+    </ion-label>
+  </ion-item>
   <ion-item class="ls" color="light">
     <ion-label class="ion-text-wrap">
+      <p class="text">
+        <b>Tafsir Kemenag:</b>
+      </p>
       <p class="txt" [innerHtml]="txt" style="white-space: pre-line;"></p>
       <p class="wr"></p>
     </ion-label>

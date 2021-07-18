@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../services/data/rest.service';
 import { GnService } from '../../../services/data/gn.service';
-import { ModalController, IonContent } from '@ionic/angular';
+import { ModalController, IonContent, PopoverController } from '@ionic/angular';
 import { PopoverComponent } from './popover/popover.component';
+import { PopoverHeaderComponent } from './popover-header/popover-header.component';
 import { PlayComponent } from '../play/play.component';
 import { TafsirComponent } from '../tafsir/tafsir.component';
 
@@ -22,16 +23,15 @@ export class ReadPage {
       }
     }
   };
-
+  
   di = ['block', 'block', 1,2];
   ayh:any=[];
   ho = true;
-  constructor(private modalController:ModalController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) {
-    
+  constructor(private modalController:ModalController, private popoverController:PopoverController, private rs:RestService, private activatedRoute: ActivatedRoute, public gn:GnService) {
     
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter(){
     var id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id == '1') this.di = ['none', 'block'];
     if(id == '114') this.di = ['block', 'none'];
@@ -53,36 +53,33 @@ export class ReadPage {
           trs:n.trs[i+1]
         }
       }
-      
-      
+
+
       var ayah = this.activatedRoute.snapshot.paramMap.get('ayah');
       if(ayah){
         this.things.changes.subscribe((a) => {
           setTimeout(()=>{
-            this.cth(parseInt(ayah));
+            var el = document.getElementById('ay'+ayah);
+            el.classList.add("active-ayah");
+            el.scrollIntoView();
           }, 100)
         })
-
-        
       }
-      
     })
   }
 
-  cth(ayah){
-    var el = document.getElementById('ay'+ayah);
-    el.classList.add("active-ayah");
-    el.scrollIntoView();
-  }
-
-  async ayahClick(event: any, id, surah, num) {
+  async ayahClick(id) {
+    var surah = this.srh.name_latin;
+    var num = this.srh.number;
+    var sr = this.ayh[id-1]
     const modal = await this.modalController.create({
       component: PopoverComponent,
       componentProps:{
         id:id,
         surah:surah,
         noSurah:num,
-        tfs: this.srh.tafsir.id.kemenag.text[id]
+        sr:sr,
+        tfs: this.srh.tafsir.id.kemenag.text[id],
       },
       swipeToClose: true,
       mode:"ios",
@@ -101,7 +98,6 @@ export class ReadPage {
       componentProps:{
         num:this.srh.number,
       },
-      swipeToClose: true,
       mode:"ios",
       cssClass:'modal-audio',
       backdropDismiss: true
@@ -127,6 +123,24 @@ export class ReadPage {
       
     })
     return await modal.present();
+  }
+
+  async headerPopover(ev){
+    const popover = await this.popoverController.create({
+      component: PopoverHeaderComponent,
+      componentProps:{
+        num:this.srh.number,
+      },
+      mode:"md",
+      backdropDismiss: true,
+      event:ev,
+      translucent: true,
+      cssClass: 'popo'
+    });
+    popover.onDidDismiss().then(()=>{
+      
+    })
+    return await popover.present();
   }
 
   // scrollToLabel(label) {

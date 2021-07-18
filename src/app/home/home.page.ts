@@ -35,19 +35,19 @@ export class HomePage {
   }
 
   ionViewDidEnter(){
-    this.bannerSlides.update();
-    this.menuSlides.update();
-
     this.gn.st.get('lastRead').then(data=>{
       if(data != null){
         this.lr = 'block';
         this.lastRead = data
       }
     })
+
+    this.bannerSlides.update();
+    this.menuSlides.update();
   }
 
   navSlide(val){
-
+    this.menuSlides.slideTo(parseInt(val));
   }
 
   openSurah(id){
@@ -79,7 +79,6 @@ export class HomePage {
       componentProps:{
         num:num,
       },
-      swipeToClose: true,
       mode:"ios",
       cssClass:'modal-audio',
       backdropDismiss: true

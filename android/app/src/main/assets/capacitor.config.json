@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Uiniqu",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

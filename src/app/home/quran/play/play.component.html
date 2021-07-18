@@ -1,11 +1,15 @@
-<ion-list lines="none">
+<ion-list>
+  <div class="ion-text-center w-100 ion-padding-start ion-padding-end">
+    <ion-button mode="ios" color="dark" size="small" fill="clear" expand="block" (click)="close()">Ketuk 2x untuk menutup</ion-button>
+  </div>
   <ion-item class="title" color="light" detail="false" lines="none">
     <ion-label>
       <p>{{surah}} &nbsp;•&nbsp; Alafasy</p>
     </ion-label>
   </ion-item>
   <ion-item class="ls" color="light">
-    <audio controls [src]="aud" >
+    <audio controls [src]="aud" autoplay (canplay)="loadEv()">
     </audio>
+    <ion-spinner name="crescent" slot="end" [style]="dis"></ion-spinner>
   </ion-item>
 </ion-list>

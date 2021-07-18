@@ -7,17 +7,18 @@ import { ToastController, AlertController, LoadingController } from '@ionic/angu
   providedIn: 'root'
 })
 export class GnService {
-
+  public translateDisplay = "block";
+  public popoverTranslateDisplay = ['none','block'];
   constructor(private router:Router, public st:Storage, public toastController:ToastController, public alert:AlertController, public loading:LoadingController) { }
   
   public navigate(url){
     this.router.navigateByUrl(url);
   }
 
-  public async toast(text, color='light') {
+  public async toast(text, color='light', duration = 2000) {
     const toast = await this.toastController.create({
       message: text,
-      duration: 2000,
+      duration: duration,
       color:color
     });
     toast.present();

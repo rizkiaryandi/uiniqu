@@ -17,6 +17,7 @@ export class PopoverComponent implements OnInit {
   pQori="";
   pLink = "";
   tfs = "";
+  sr;
   constructor(private modalController:ModalController, private rs:RestService, private gn:GnService) { }
 
   ngOnInit() {
@@ -71,7 +72,8 @@ export class PopoverComponent implements OnInit {
       component: TafsirComponent,
       componentProps:{
         surah:"Tafsir "+this.surah+" • "+this.id,
-        txt:this.tfs
+        txt:this.tfs,
+        sr:this.sr
       },
       mode:"ios",
       cssClass:'modal-tafsir',

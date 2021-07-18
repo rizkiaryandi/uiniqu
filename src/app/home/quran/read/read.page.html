@@ -7,11 +7,14 @@
       {{srh.name_latin}}
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button [ngStyle]="{'display':di[0]}" (click)="gn.navigate('home/quran/read/'+di[2])">
+      <ion-button shape="round" [ngStyle]="{'display':di[0]}" (click)="gn.navigate('home/quran/read/'+di[2])">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
-      <ion-button [ngStyle]="{'display':di[1]}" (click)="gn.navigate('home/quran/read/'+di[3])">
+      <ion-button shape="round" [ngStyle]="{'display':di[1]}" (click)="gn.navigate('home/quran/read/'+di[3])">
         <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" (click)="headerPopover($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -36,7 +39,7 @@
   </ion-header>
   <div>
     <ion-list class="ion-no-padding">
-      <ion-item #allTheseThings [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'" button lines="none" *ngFor="let sr of ayh; let last = last" (click)="ayahClick($event, sr.no, srh.name_latin, srh.number)" id="ay{{sr.no}}">
+      <ion-item #allTheseThings [ngClass]="(sr.no % 2 == 0) ? 'odd' : 'even'" button lines="none" *ngFor="let sr of ayh; let last = last" (click)="ayahClick(sr.no)" id="ay{{sr.no}}">
         <ion-avatar>
           {{sr.no}}
         </ion-avatar>
@@ -44,7 +47,7 @@
           <p class="txt">
             {{sr.txt}}
           </p>
-          <p class="trs">
+          <p class="trs" [ngStyle]="{'display':gn.translateDisplay}">
             {{sr.trs}}
           </p>
         </ion-label>

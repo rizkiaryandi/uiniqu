@@ -60,10 +60,10 @@ div.swiper-pagination {
 }
 
 .modal-audio .modal-wrapper{
-    height: 128px;
+    height: 144px;
     position: absolute;
     bottom:0px;
-    border-radius: 24px 24px 0px 0px;
+    // border-radius: 24px 24px 0px 0px;
 }
 
 .modal-tafsir .modal-wrapper{
@@ -71,4 +71,12 @@ div.swiper-pagination {
     position: absolute;
     bottom:0px;
     border-radius: 14px 14px 0px 0px;
+}
+
+.popo .popover-content {
+    --width: 215px;
+  }
+
+.w-100{
+    width: 100% !important;
 }

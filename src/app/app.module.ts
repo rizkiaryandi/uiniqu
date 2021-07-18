@@ -11,10 +11,13 @@ import { Storage } from '@ionic/storage';
 
 
 import { PopoverComponent } from './home/quran/read/popover/popover.component';
+import { PopoverHeaderComponent } from './home/quran/read/popover-header/popover-header.component';
+import { TafsirComponent } from './home/quran/tafsir/tafsir.component';
+import { PlayComponent } from './home/quran/play/play.component';
 
 @NgModule({
-  declarations: [AppComponent, PopoverComponent],
-  entryComponents: [PopoverComponent],
+  declarations: [AppComponent, PopoverComponent, PopoverHeaderComponent, TafsirComponent, PlayComponent],
+  entryComponents: [PopoverComponent, PopoverHeaderComponent, TafsirComponent, PlayComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     backButtonText: ''
   }), AppRoutingModule, HttpClientModule],
